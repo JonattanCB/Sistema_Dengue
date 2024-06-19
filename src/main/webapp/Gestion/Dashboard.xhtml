@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+   <title><h:outputText value="Dasboard"/></title>
+   <link href="http://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+   <h:outputStylesheet library="primefaces-vela" name="theme.css"/>
+    <h:outputStylesheet library="css" name="SylerTodo.css"/>
+   <h:outputStylesheet library="css" name="StylesDasboard.css"/>
+   <h:outputStylesheet library="css" name="StylerMenu.css"/>
+</h:head>
+<h:body>
+   <h:form id="myform">
+      <div id="menu" class="contenido-menu">
+         <h:panelGrid styleClass="contenedor-logo-Empresa" >
+            <h:graphicImage styleClass="logo-menu" url="https://cdn-icons-png.flaticon.com/512/8968/8968116.png"  />
+             <p:outputLabel value="Willka Dengue"  />
+         </h:panelGrid>
+         <div class="Contenedor-menu-opciones"><br/><br/>
+             <h:commandLink action="#{beansUsuario.irDashboard()}"  styleClass="opciones-enlace" target="contenido"  style="width: 100%">
+                 <i class="pi pi-home"/><h:outputText  value="Home" styleClass="perfil-editar"/>
+             </h:commandLink><br/>
+             <h:commandLink action="#{beansUsuario.irUsuario()}"  styleClass="opciones-enlace" target="contenido"  style="width: 100%">
+                 <i class="pi pi-users" /><h:outputText  value="Usuario" styleClass="perfil-editar"/>
+             </h:commandLink><br/>
+             <h:commandLink action="#{beansPaciente.irPaciente()}"  styleClass="opciones-enlace" target="contenido"  style="width: 100%">
+                 <i class="bi bi-clipboard2-fill" /><h:outputText  value="Paciente" styleClass="perfil-editar"/>
+             </h:commandLink><br/>
+             <h:commandLink action="#{beansCiudades.irCiudad()}"  styleClass="opciones-enlace" target="contenido"  style="width: 100%">
+                 <i class="bi bi-buildings-fill" /><h:outputText  value="Ciudad" styleClass="perfil-editar"/>
+             </h:commandLink><br/>
+             <h:commandLink action="#{beansPaciente.irEstadosPaciente()}"  styleClass="opciones-enlace" target="contenido"  style="width: 100%">
+                 <i class="bi bi-substack" /><h:outputText  value="Estados del Paciente" styleClass="perfil-editar"/>
+             </h:commandLink><br/>
+             <h:commandLink action="Panel"  styleClass="opciones-enlace" target="contenido"  style="width: 100%">
+                 <i class="pi pi-chart-pie" /><h:outputText  value="Prediccion" styleClass="perfil-editar"/>
+             </h:commandLink><br/>
+         </div>
+      </div>
+     <div class="Contenido-escritorio-opciones">
+         <h:panelGrid styleClass="contenido-banner" columns="2">
+             <h:panelGrid columns="2" style="width: 700px" >
+                 <h:panelGrid style="width: 1px;  margin-left: auto;">
+                     <h:panelGrid styleClass="vertical-line-titulo" />
+                 </h:panelGrid>
+                 <h:panelGrid>
+                     <h:outputText value="Sistema de Dengue" styleClass="titulo-banner" />
+                 </h:panelGrid>
+             </h:panelGrid>
+             <h:panelGrid >
+                 <h:panelGrid columns="2"  onclick="toggleSubmenu()" styleClass="btn-perfil">
+                     <h:panelGrid>
+                         <p:avatar icon="pi pi-user" styleClass="mr-2" style="background-color:#9c27b0; color:#fff" />
+                     </h:panelGrid>
+                     <h:panelGrid>
+                         <h:outputText value="#{beansUsuario.usuario_ingresado.nombre} #{beansUsuario.usuario_ingresado.apellido}"  styleClass="nombre-usuario"/>
+                     </h:panelGrid>
+                 </h:panelGrid>
+             </h:panelGrid>
+         </h:panelGrid>
+         <div id="submenu-perfil" class="submenu-perfil">
+             <h:panelGrid style="padding: 5px 10px;">
+                 <h:commandLink action="#{beansUsuario.salir()}"  styleClass="opciones-perfil"  style="width: 100%">
+                     <i class="pi pi-power-off" /><h:outputText  value="Cerrar Sesion" styleClass="perfil-editar"/>
+                 </h:commandLink>
+             </h:panelGrid>
+         </div>
+         <iframe name="contenido" class="contenido-escritorio"  />
+     </div>
+   </h:form>
+    <h:outputScript>
+        function toggleSubmenu() {
+            var submenu = document.getElementById("submenu-perfil");
+            if (submenu) {
+                submenu.classList.toggle("visible");
+            } else {
+                console.error("Elemento 'submenu-perfil' no encontrado.");
+            }
+        }
+    </h:outputScript>
+</h:body>
+</html>

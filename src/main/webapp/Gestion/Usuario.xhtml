@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Gestion Usuario</title>
+    <h:outputStylesheet  library="primefaces-saga" name="theme.css" />
+    <h:outputStylesheet library="css" name="SylerTodo.css"/>
+    <h:outputStylesheet library="css" name="StylerPanels.css"/>
+</h:head>
+<h:body styleClass="contendor-panel" >
+    <h:form  id="form">
+        <p:growl id="messages" />
+        <p:panel styleClass="card-informacion">
+            <f:facet name="header">
+                <i class="pi pi-th-large"/> <p:outputLabel value="Gestión de usuarios" styleClass="titulo-card" />
+            </f:facet>
+            <p:toolbar style="height: 25%">
+                <p:toolbarGroup>
+                    <p:commandButton value="Nuevo Usuario" icon="pi pi-plus" actionListener="#{beansUsuario.nuevoUsuario()}"
+                                     update=":dialogs" oncomplete="PF('userdialog').show()" disabled=""
+                                     styleClass="nuevo-button ui-button-success">
+                        <p:resetInput target=":dialogs:userdialog-content" />
+                    </p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar><br/>
+            <p:dataTable id="dt-user" var="user" value="#{beansUsuario.lstUsuario}" widgetVar="user"
+                         emptyMessage="No hay elementos disponibles."
+                         filteredValue="#{beansUsuario.lstUsuarioSeleccionado}"
+                         globalFilterFunction="#{beansUsuario.globalFilterFunction}"
+                         rows="10" paginator="true" rowSelectMode="add" paginatorPosition="bottom">
+                <f:facet name="header">
+                    <div class="buscador-table" style="height: 20%">
+                        <span class="titulo-tabla">Catálogo de usuario</span>
+                        <span class="filter-container ui-input-icon-left" style="float: right">
+                            <i class="pi pi-search"/>
+                            <p:inputText id="globalFilter" onkeyup="PF('user').filter()"  style="font-size: 13px;width: 300px"
+                                         placeholder="Buscar entre los nombres de Usuario" />
+                        </span>
+                    </div>
+                </f:facet>
+                <p:column headerText="#" sortBy="#{user.id}" width="20" >
+                    <h:outputText value="#{user.id}" styleClass="columnas-texto-table"/>
+                </p:column>
+                <p:column headerText="Nombre Completo" sortBy="#{user.nombre} #{user.apellido}" width="100" >
+                    <h:outputText value="#{user.nombre} #{user.apellido}" styleClass="columnas-texto-table" />
+                </p:column>
+                <p:column headerText="Tipo de  Documento" sortBy="#{user.tdocumento}" width="100"  >
+                    <h:outputText value="#{user.tdocumento}" styleClass="columnas-texto-table"/>
+                </p:column>
+                <p:column headerText="Numero de  Documento" sortBy="#{user.ndocumento}" width="100"  >
+                    <h:outputText value="#{user.ndocumento}" styleClass="columnas-texto-table" />
+                </p:column>
+                <p:column headerText="Acciones"  width="100">
+                    <p:commandButton icon="pi pi-book" update=":dialogs" style="margin-right: .5rem;"
+                                     oncomplete="PF('userdialog').show()" action="#{beansUsuario.verUsuario()}"
+                                     styleClass="edit-button rounded-button ui-button-info" process="@this">
+                        <f:setPropertyActionListener value="#{user.id}" target="#{beansUsuario.idUsuario}" />
+                    </p:commandButton>
+                    <p:commandButton icon="pi pi-pencil" update=":dialogs" style="margin-right: .5rem;"
+                                     oncomplete="PF('userdialog').show()" action="#{beansUsuario.editar()}"
+                                     styleClass="edit-button rounded-button ui-button-warning" process="@this">
+                        <f:setPropertyActionListener value="#{user.id}" target="#{beansUsuario.idUsuario}" />
+                    </p:commandButton>
+                    <p:commandButton class="edit-button  ui-button-danger rounded-button" style="margin-right: .5rem;"
+                                     icon="pi pi-trash" action="#{beansUsuario.eliminar()}" >
+                        <f:setPropertyActionListener value="#{user.id}" target="#{beansUsuario.idUsuario}" />
+                        <p:confirm header="Confirmacion" message="¿Está seguro de que desea eliminar a este usuario?" icon="pi pi-info-circle"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+    <h:form id="dialogs" enctype="multipart/form-data">
+        <p:dialog header="Detalles del Usuario" showEffect="fade" modal="true" widgetVar="userdialog" width="800" height="400" responsive="true" styleClass="dialogs-barra">
+            <p:outputPanel id="userdialog-content" styleClass="ui-fluid dialogs-barra"  >
+                <p:accordionPanel multiple="true">
+                    <p:tab title="Datos Personales ">
+                        <h:panelGrid columns="2" width="100%">
+                            <h:panelGrid width="95%">
+                                <p:outputLabel for="nombre" value="Nombre" />
+                                <p:inputText  value="#{beansUsuario.usuario.nombre}"  id="nombre" required="true" rendered="#{beansUsuario.escribirUsuario}"/>
+                                <p:outputLabel value="#{beansUsuario.usuario.nombre}" required="true" rendered="#{beansUsuario.verUsuarioVista}"/>
+                            </h:panelGrid>
+                            <h:panelGrid  width="95%">
+                                <p:outputLabel for="apellido" value="Apellido" />
+                                <p:inputText  value="#{beansUsuario.usuario.apellido}"  id="apellido" rendered="#{beansUsuario.escribirUsuario}" />
+                                <p:outputLabel value="#{beansUsuario.usuario.apellido}"  required="true" rendered="#{beansUsuario.verUsuarioVista}"/>
+                            </h:panelGrid>
+                        </h:panelGrid><br/>
+                        <h:panelGrid columns="2" width="100%">
+                            <h:panelGrid width="95%" >
+                                <p:outputLabel for="tdocumento"  value="Tipo de Documento" style="width: 300px"/>
+                                <p:selectOneMenu id="tdocumento"  styleClass="ui-selectonemenu"  value="#{beansUsuario.TDocumentos}" required="true" style="width:100%" autoWidth="false" rendered="#{beansUsuario.escribirUsuario}" >
+                                    <f:selectItem  noSelectionOption="true" itemLabel="Seleccionar Opcion"  />
+                                    <f:selectItem  itemLabel="DNI"  itemValue="DNI" />
+                                    <f:selectItem  itemLabel="Pasaporte"  itemValue="Pasaporte" />
+                                </p:selectOneMenu>
+                                <p:outputLabel  value="#{beansUsuario.usuario.tdocumento}"  required="true" rendered="#{beansUsuario.verUsuarioVista}" />
+                            </h:panelGrid>
+                            <h:panelGrid width="95%" >
+                                <p:outputLabel for="ndocumento" value="Numero de Documento" />
+                                <p:inputText type="number"  value="#{beansUsuario.usuario.ndocumento}" id="ndocumento" required="true" rendered="#{beansUsuario.escribirUsuario}"  />
+                                <p:outputLabel  value="#{beansUsuario.usuario.ndocumento}" required="true" rendered="#{beansUsuario.verUsuarioVista}" />
+                            </h:panelGrid>
+                        </h:panelGrid><br/>
+                        <h:panelGrid width="97%">
+                            <p:outputLabel for="direccion" value="Direccion" />
+                            <p:inputText id="direccion"  value="#{beansUsuario.usuario.direccion}" required="true" rendered="#{beansUsuario.escribirUsuario}"  />
+                            <p:outputLabel value="#{beansUsuario.usuario.direccion}" required="true" rendered="#{beansUsuario.verUsuarioVista}"  />
+                        </h:panelGrid><br/>
+                        <h:panelGrid width="97%">
+                            <p:outputLabel for="telefono" value="Telefono" />
+                            <p:inputText id="telefono" type="number"  value="#{beansUsuario.usuario.telefono}" required="true" rendered="#{beansUsuario.escribirUsuario}"/>
+                            <p:outputLabel value="#{beansUsuario.usuario.telefono}" required="true" rendered="#{beansUsuario.verUsuarioVista}" />
+                        </h:panelGrid><br/>
+                    </p:tab>
+                </p:accordionPanel><br/>
+                <p:accordionPanel>
+                    <p:tab title="Datos Usuario">
+                        <h:panelGrid columns="2" width="100%">
+                            <h:panelGrid width="180">
+                                <p:outputLabel for="rol" value="Rol Encargado" />
+                            </h:panelGrid>
+                            <h:panelGrid  width="500">
+                                <p:inputText  id="rol" value="#{beansUsuario.usuario.cargo}" required="true" rendered="#{beansUsuario.escribirUsuario}" />
+                                <p:outputLabel value="#{beansUsuario.usuario.cargo}" required="true" rendered="#{beansUsuario.verUsuarioVista}" />
+                            </h:panelGrid>
+                        </h:panelGrid><br/>
+                        <h:panelGrid columns="2" width="100%">
+                            <h:panelGrid width="95%">
+                                <p:outputLabel for="correo" value="Correo" />
+                                <p:inputText  value="#{beansUsuario.usuario.correo}" id="correo" required="true" rendered="#{beansUsuario.escribirUsuario}"  />
+                                <p:outputLabel value="#{beansUsuario.usuario.correo}" rendered="#{beansUsuario.verUsuarioVista}"/>
+                            </h:panelGrid>
+                            <h:panelGrid  width="95%">
+                                <p:outputLabel for="Contrasenia" value="Contraseña" rendered="#{beansUsuario.escribirUsuario}" />
+                                <p:inputText  value="#{beansUsuario.usuario.contra}" id="Contrasenia" required="true" rendered="#{beansUsuario.escribirUsuario}" />
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </p:tab>
+                </p:accordionPanel>
+            </p:outputPanel>
+            <f:facet name="footer">
+                <p:commandButton value="Guardar"  icon="pi pi-check" action="#{beansUsuario.guardar()}" update="userdialog-content" process="userdialog-content @this" rendered="#{beansUsuario.escribirUsuario}"  />
+                <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('userdialog').hide()"  styleClass="ui-button-secondary" type="button"/>
+            </f:facet>
+        </p:dialog>
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" />
+        </p:confirmDialog>
+    </h:form>
+</h:body>
+</html>

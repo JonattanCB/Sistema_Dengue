@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Paneles</title>
+    <h:outputStylesheet library="primefaces-saga" name="theme.css"/>
+    <h:outputStylesheet  library="css" name="StylerPanels.css" />
+    <h:outputStylesheet library="css" name="SylerTodo.css"/>
+</h:head>
+<h:body styleClass="contendor-panel">
+    <h:form>
+    <h:panelGrid columns="4" styleClass="estructura-card">
+        <p:panel styleClass="card" style=" border-left: 5px solid #64b5f6; ">
+            <h:panelGrid columns="3" styleClass="estructura-card-opciones" >
+                <h:panelGrid styleClass="contendor-card-icon">
+                    <h:graphicImage url="https://cdn-icons-png.flaticon.com/256/4850/4850909.png"
+                    styleClass="icon-card" />
+                </h:panelGrid>
+                <h:panelGrid styleClass="vertical-line" />
+                <h:panelGrid styleClass="contendor-card-texto">
+                        <p:outputLabel value="Personal" styleClass="estructura-card-titulo" style="color: #64b5f6" />
+                        <p:outputLabel value="Cantidad: #{beansUsuario.cantPersonal}" styleClass="cantidad-card" />
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+        <p:panel styleClass="card" style=" border-left: 5px solid #7986cb; ">
+            <h:panelGrid columns="3" styleClass="estructura-card-opciones">
+                <h:panelGrid styleClass="contendor-card-icon">
+                    <h:graphicImage url="https://cdn-icons-png.flaticon.com/256/2854/2854213.png"
+                                    styleClass="icon-card" />
+                </h:panelGrid>
+                <h:panelGrid styleClass="vertical-line" />
+                <h:panelGrid styleClass="contendor-card-texto">
+                    <p:outputLabel value="Paciente" styleClass="estructura-card-titulo" style="color:#7986cb;" />
+                    <p:outputLabel value="Cantidad: #{beansUsuario.cantPaciente}" styleClass="cantidad-card" />
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+        <p:panel styleClass="card" style=" border-left: 5px solid #4db6ac; ">
+            <h:panelGrid columns="3" styleClass="estructura-card-opciones" >
+                <h:panelGrid styleClass="contendor-card-icon">
+                    <h:graphicImage url="https://cdn-icons-png.flaticon.com/256/8107/8107336.png"
+                                    styleClass="icon-card" />
+                </h:panelGrid>
+                <h:panelGrid styleClass="vertical-line" />
+                <h:panelGrid styleClass="contendor-card-texto">
+                    <p:outputLabel value="Infectados" styleClass="estructura-card-titulo" style="color: #4db6ac" />
+                    <p:outputLabel value="Cantidad: #{beansUsuario.cantInfectado}" styleClass="cantidad-card" />
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+        <p:panel styleClass="card" style=" border-left: 5px solid #4dd0e1; ">
+            <h:panelGrid columns="3" styleClass="estructura-card-opciones" >
+                <h:panelGrid styleClass="contendor-card-icon">
+                    <h:graphicImage url="https://cdn-icons-png.flaticon.com/256/1176/1176664.png"
+                                    styleClass="icon-card" />
+                </h:panelGrid>
+                <h:panelGrid styleClass="vertical-line" />
+                <h:panelGrid styleClass="contendor-card-texto">
+                    <p:outputLabel value="Curados" styleClass="estructura-card-titulo" style="color:#4dd0e1;" />
+                    <p:outputLabel value="Cantidad: #{beansUsuario.cantCurados}" styleClass="cantidad-card" />
+                </h:panelGrid>
+            </h:panelGrid>
+        </p:panel>
+    </h:panelGrid>
+        <h:panelGrid styleClass="tablas-panels" columns="2">
+            <p:panel styleClass="card-ifon" style="width: 450px;">
+                <h:panelGrid columns="2">
+                    <i class="pi pi-list"></i><h:outputText  value="Ciudades Por infecccion" styleClass="titulo-card-inf" />
+                </h:panelGrid>
+                <h:panelGrid/>
+                <p:dataTable var="ciudadinf" value="#{beansUsuario.lstCiudadInfectada}"  rows="5"
+                             size="small" paginator="true" rowSelectMode="add" paginatorPosition="bottom">
+                    <p:column headerText="Nombre" sortBy="#{ciudadinf.nombre}" >
+                        <h:outputText value="#{ciudadinf.nombre}"  styleClass="texto-letra-opciones"  />
+                    </p:column>
+                    <p:column headerText="Cantidad" sortBy="#{ciudadinf.cantidad}" >
+                        <h:outputText value="#{ciudadinf.cantidad}"  styleClass="texto-letra-opciones"  />
+                    </p:column>
+                </p:dataTable><br/><br/>
+            </p:panel>
+            <p:panel styleClass="card-ifon"  style="width: 780px">
+                <h:panelGrid columns="2">
+                    <i class="pi pi-box"></i><h:outputText  value="Pacientes" styleClass="titulo-card-inf" />
+                </h:panelGrid>
+                <h:panelGrid/>
+                <p:dataTable var="pas" value="#{beansUsuario.lstPaciente}"  rows="5"
+                             size="small" paginator="true" rowSelectMode="add" paginatorPosition="bottom">
+                   <p:column headerText="#" sortBy="#{pas.id}" >
+                       <h:outputText value="#{pas.id}" styleClass="texto-letra-opciones"  />
+                   </p:column>
+                    <p:column headerText="Nombre" sortBy="#{pas.nombre} #{pas.apellido}" >
+                        <h:outputText value="#{pas.nombre} #{pas.apellido}"  styleClass="texto-letra-opciones"  />
+                    </p:column>
+                    <p:column headerText="Telefono" sortBy="#{pas.telefono}" >
+                        <h:outputText value="#{pas.telefono}"  styleClass="texto-letra-opciones"  />
+                    </p:column>
+                    <p:column headerText="Estado" sortBy="#{pas.estado}" >
+                        <h:outputText value="#{pas.estado}"  styleClass="customer-badge status-#{pas.estado}" />
+                    </p:column>
+               </p:dataTable>
+            </p:panel>
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Proyecto Dengue</title>
+    <h:outputStylesheet  library="primefaces-saga" name="theme.css"  />
+    <h:outputStylesheet  library="css" name="StylesLogin.css"  />
+</h:head>
+<h:body styleClass="color-fondo">
+    <h:form id="form">
+        <p:growl id="messages" />
+        <div class="container-form">
+            <div class="form">
+                <h:panelGrid styleClass="container-logo">
+                    <p:graphicImage styleClass="logo"
+                                    url="https://cdn-icons-png.flaticon.com/512/8968/8968116.png" />
+                    <p:outputLabel  value="Willka Dengue" />
+                </h:panelGrid>
+                <h:panelGrid styleClass="container-items">
+                    <h:panelGrid styleClass="container-bienvenido">
+                        <p>
+                            <h:outputText value="¡Bienvenido de nuevo!" styleClass="bienvenido" />
+                        </p>
+                    </h:panelGrid>
+                    <h:panelGrid styleClass="container-inputs">
+                        <p:inputText value="#{beansUsuario.usuario_ingresado.correo}" placeholder="Correo" styleClass="correo"  type="email" /><br/>
+                        <p:password value="#{beansUsuario.usuario_ingresado.contra}" toggleMask="true" redisplay="true"
+                                    placeholder="Contraseña" styleClass="correo" /><br/>
+                        <p:commandButton value="Iniciar Sesion"  action="#{beansUsuario.verificiarIngreso()}" styleClass="button ui-button-danger"
+                                         update="form" />
+                    </h:panelGrid>
+                </h:panelGrid>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+
+
+</html>
