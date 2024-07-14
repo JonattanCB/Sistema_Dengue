@@ -19,10 +19,10 @@
             <f:facet name="header">
                 <i class="pi pi-th-large"/> <p:outputLabel value="Gestión de paciente estado" styleClass="titulo-card" />
             </f:facet>
-            <p:dataTable id="dt-user" var="user" value="#{beansPaciente.lstPaciente}" widgetVar="user"
+            <p:dataTable id="dt-user" var="user" value="#{BeansPaciente.lstPaciente}" widgetVar="user"
                          emptyMessage="No hay elementos disponibles."
-                         filteredValue="#{beansPaciente.lstSeleccionarPaciente}"
-                         globalFilterFunction="#{beansPaciente.globalFilterFunction}"
+                         filteredValue="#{BeansPaciente.lstSeleccionarPaciente}"
+                         globalFilterFunction="#{BeansPaciente.globalFilterFunction}"
                          rows="10" paginator="true" rowSelectMode="add" paginatorPosition="bottom">
                 <f:facet name="header">
                     <div class="buscador-table" style="height: 20%">
@@ -51,23 +51,23 @@
                 </p:column>
                 <p:column headerText="Acciones"  width="150">
                     <p:commandButton class="edit-button ui-button-success  rounded-button" style="margin-right: .5rem;"
-                                     icon="bi bi-clipboard2-heart-fill" action="#{beansPaciente.estadocurado()}" >
-                        <f:setPropertyActionListener value="#{user.id}" target="#{beansPaciente.idEstado}" />
+                                     icon="bi bi-clipboard2-heart-fill" action="#{BeansPaciente.estadocurado()}" >
+                        <f:setPropertyActionListener value="#{user.id}" target="#{BeansPaciente.idEstado}" />
                         <p:confirm header="Confirmacion" message="¿Está seguro de que desea cambiar el estado de este paciente a 'curado'?" icon="pi pi-info-circle"/>
                     </p:commandButton>
                     <p:commandButton class="edit-button  ui-button-secondary rounded-button" style="margin-right: .5rem;"
-                                     icon="bi bi-clipboard2-check" action="#{beansPaciente.estadonormal()}" >
-                        <f:setPropertyActionListener value="#{user.id}" target="#{beansPaciente.idEstado}" />
+                                     icon="bi bi-clipboard2-check" action="#{BeansPaciente.estadonormal()}" >
+                        <f:setPropertyActionListener value="#{user.id}" target="#{BeansPaciente.idEstado}" />
                         <p:confirm header="Confirmacion" message="¿Está seguro de que desea cambiar el estado de este paciente a 'normal'?" icon="pi pi-info-circle"/>
                     </p:commandButton>
                     <p:commandButton class="edit-button  ui-button-warning rounded-button" style="margin-right: .5rem;"
-                                     icon="bi bi-clipboard2-pulse-fill" action="#{beansPaciente.estadoinfectado()}" >
-                        <f:setPropertyActionListener value="#{user.id}" target="#{beansPaciente.idEstado}" />
+                                     icon="bi bi-clipboard2-pulse-fill" action="#{BeansPaciente.estadoinfectado()}" >
+                        <f:setPropertyActionListener value="#{user.id}" target="#{BeansPaciente.idEstado}" />
                         <p:confirm header="Confirmacion" message="¿Está seguro de que desea cambiar el estado de este paciente a 'infectado'?" icon="pi pi-info-circle"/>
                     </p:commandButton>
                     <p:commandButton class="edit-button  ui-button-danger rounded-button" style="margin-right: .5rem;"
-                                     icon="bi bi-clipboard2-x-fill" action="#{beansPaciente.estadomuerto()}" >
-                        <f:setPropertyActionListener value="#{user.id}" target="#{beansPaciente.idEstado}" />
+                                     icon="bi bi-clipboard2-x-fill" action="#{BeansPaciente.estadomuerto()}" >
+                        <f:setPropertyActionListener value="#{user.id}" target="#{BeansPaciente.idEstado}" />
                         <p:confirm header="Confirmacion" message="¿Está seguro de que desea cambiar el estado de este paciente a 'muerto'?" icon="pi pi-info-circle"/>
                     </p:commandButton>
                 </p:column>

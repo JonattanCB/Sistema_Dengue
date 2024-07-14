@@ -20,17 +20,17 @@
             </f:facet>
             <p:toolbar style="height: 25%">
                 <p:toolbarGroup>
-                    <p:commandButton value="Nuevo Paciente" icon="pi pi-plus" actionListener="#{beansPaciente.nuevoPaciente()}"
+                    <p:commandButton value="Nuevo Paciente" icon="pi pi-plus" actionListener="#{BeansPaciente.nuevoPaciente()}"
                                      update=":dialogs" oncomplete="PF('userdialog').show()" disabled=""
                                      styleClass="nuevo-button ui-button-success">
                         <p:resetInput target=":dialogs:userdialog-content" />
                     </p:commandButton>
                 </p:toolbarGroup>
             </p:toolbar><br/>
-            <p:dataTable id="dt-user" var="user" value="#{beansPaciente.lstPaciente}" widgetVar="user"
+            <p:dataTable id="dt-user" var="user" value="#{BeansPaciente.lstPaciente}" widgetVar="user"
                          emptyMessage="No hay elementos disponibles."
-                         filteredValue="#{beansPaciente.lstSeleccionarPaciente}"
-                         globalFilterFunction="#{beansPaciente.globalFilterFunction}"
+                         filteredValue="#{BeansPaciente.lstSeleccionarPaciente}"
+                         globalFilterFunction="#{BeansPaciente.globalFilterFunction}"
                          rows="10" paginator="true" rowSelectMode="add" paginatorPosition="bottom">
                 <f:facet name="header">
                     <div class="buscador-table" style="height: 20%">
@@ -56,18 +56,18 @@
                 </p:column>
                 <p:column headerText="Acciones"  width="100">
                     <p:commandButton icon="pi pi-book" update=":dialogs" style="margin-right: .5rem;"
-                                     oncomplete="PF('userdialog').show()" action="#{beansPaciente.verPaciente()}"
+                                     oncomplete="PF('userdialog').show()" action="#{BeansPaciente.verPaciente()}"
                                      styleClass="edit-button rounded-button ui-button-info" process="@this">
-                        <f:setPropertyActionListener value="#{user.id}" target="#{beansPaciente.id}" />
+                        <f:setPropertyActionListener value="#{user.id}" target="#{BeansPaciente.id}" />
                     </p:commandButton>
                     <p:commandButton icon="pi pi-pencil" update=":dialogs" style="margin-right: .5rem;"
-                                     oncomplete="PF('userdialog').show()" action="#{beansPaciente.editarPaciente()}"
+                                     oncomplete="PF('userdialog').show()" action="#{BeansPaciente.editarPaciente()}"
                                      styleClass="edit-button rounded-button ui-button-warning" process="@this">
-                        <f:setPropertyActionListener value="#{user.id}" target="#{beansPaciente.id}" />
+                        <f:setPropertyActionListener value="#{user.id}" target="#{BeansPaciente.id}" />
                     </p:commandButton>
                     <p:commandButton class="edit-button  ui-button-danger rounded-button" style="margin-right: .5rem;"
-                                     icon="pi pi-trash" action="#{beansPaciente.eliminar()}" >
-                        <f:setPropertyActionListener value="#{user.id}" target="#{beansPaciente.id}" />
+                                     icon="pi pi-trash" action="#{BeansPaciente.eliminar()}" >
+                        <f:setPropertyActionListener value="#{user.id}" target="#{BeansPaciente.id}" />
                         <p:confirm header="Confirmacion" message="¿Está seguro de que desea eliminar a este paciente?" icon="pi pi-info-circle"/>
                     </p:commandButton>
                 </p:column>
@@ -82,58 +82,58 @@
                         <h:panelGrid columns="2" width="100%">
                             <h:panelGrid width="95%">
                                 <p:outputLabel for="nombre" value="Nombre" />
-                                <p:inputText  value="#{beansPaciente.paciente.nombre}"  id="nombre" required="true" rendered="#{beansPaciente.escribirDatos}"/>
-                                <p:outputLabel value="#{beansPaciente.paciente.nombre}" required="true"  rendered="#{beansPaciente.verDatosview}"/>
+                                <p:inputText  value="#{BeansPaciente.paciente.nombre}"  id="nombre" required="true" rendered="#{BeansPaciente.escribirDatos}"/>
+                                <p:outputLabel value="#{BeansPaciente.paciente.nombre}" required="true"  rendered="#{BeansPaciente.verDatosview}"/>
                             </h:panelGrid>
                             <h:panelGrid  width="95%">
                                 <p:outputLabel for="apellido" value="Apellido" />
-                                <p:inputText  value="#{beansPaciente.paciente.apellido}"  id="apellido" rendered="#{beansPaciente.escribirDatos}" />
-                                <p:outputLabel value="#{beansPaciente.paciente.apellido}"  required="true" rendered="#{beansPaciente.verDatosview}"/>
+                                <p:inputText  value="#{BeansPaciente.paciente.apellido}"  id="apellido" rendered="#{BeansPaciente.escribirDatos}" />
+                                <p:outputLabel value="#{BeansPaciente.paciente.apellido}"  required="true" rendered="#{BeansPaciente.verDatosview}"/>
                             </h:panelGrid>
                         </h:panelGrid><br/>
                         <h:panelGrid columns="2" width="100%">
                             <h:panelGrid width="95%" >
                                 <p:outputLabel for="tdocumento"  value="Tipo de Documento" style="width: 300px"/>
-                                <p:selectOneMenu id="tdocumento"  styleClass="ui-selectonemenu"  value="#{beansPaciente.td}" required="true" style="width:100%" autoWidth="false" rendered="#{beansPaciente.escribirDatos}">
+                                <p:selectOneMenu id="tdocumento"  styleClass="ui-selectonemenu"  value="#{BeansPaciente.td}" required="true" style="width:100%" autoWidth="false" rendered="#{BeansPaciente.escribirDatos}">
                                     <f:selectItem  noSelectionOption="true" itemLabel="Seleccionar Opcion"  />
                                     <f:selectItem  itemLabel="DNI"  itemValue="DNI" />
                                     <f:selectItem  itemLabel="Pasaporte"  itemValue="Pasaporte" />
                                 </p:selectOneMenu>
-                                <p:outputLabel  value="#{beansPaciente.paciente.tdocumento}"  required="true" rendered="#{beansPaciente.verDatosview}"/>
+                                <p:outputLabel  value="#{BeansPaciente.paciente.tdocumento}"  required="true" rendered="#{BeansPaciente.verDatosview}"/>
                             </h:panelGrid>
                             <h:panelGrid width="95%" >
                                 <p:outputLabel for="ndocumento" value="Numero de Documento" />
-                                <p:inputText type="number"  value="#{beansPaciente.paciente.ndocumento}" id="ndocumento" required="true" rendered="#{beansPaciente.escribirDatos}" />
-                                <p:outputLabel  value="#{beansPaciente.paciente.ndocumento}" required="true" rendered="#{beansPaciente.verDatosview}" />
+                                <p:inputText type="number"  value="#{BeansPaciente.paciente.ndocumento}" id="ndocumento" required="true" rendered="#{BeansPaciente.escribirDatos}" />
+                                <p:outputLabel  value="#{BeansPaciente.paciente.ndocumento}" required="true" rendered="#{BeansPaciente.verDatosview}" />
                             </h:panelGrid>
                         </h:panelGrid><br/>
                         <h:panelGrid width="97%">
                             <p:outputLabel for="direccion" value="Direccion" />
-                            <p:inputText id="direccion"  value="#{beansPaciente.paciente.direccion}" required="true" rendered="#{beansPaciente.escribirDatos}" />
-                            <p:outputLabel value="#{beansPaciente.paciente.direccion}" required="true" rendered="#{beansPaciente.verDatosview}" />
+                            <p:inputText id="direccion"  value="#{BeansPaciente.paciente.direccion}" required="true" rendered="#{BeansPaciente.escribirDatos}" />
+                            <p:outputLabel value="#{BeansPaciente.paciente.direccion}" required="true" rendered="#{BeansPaciente.verDatosview}" />
                         </h:panelGrid><br/>
                         <h:panelGrid width="97%">
                             <p:outputLabel for="telefono" value="Telefono" />
-                            <p:inputText id="telefono" type="number"  value="#{beansPaciente.paciente.telefono}" required="true" rendered="#{beansPaciente.escribirDatos}"/>
-                            <p:outputLabel value="#{beansPaciente.paciente.telefono}" required="true" rendered="#{beansPaciente.verDatosview}"/>
+                            <p:inputText id="telefono" type="number"  value="#{BeansPaciente.paciente.telefono}" required="true" rendered="#{BeansPaciente.escribirDatos}"/>
+                            <p:outputLabel value="#{BeansPaciente.paciente.telefono}" required="true" rendered="#{BeansPaciente.verDatosview}"/>
                         </h:panelGrid><br/>
                         <h:panelGrid columns="2" width="100%">
                             <h:panelGrid width="180">
                                 <p:outputLabel for="ciudad" value="Ciudad" />
                             </h:panelGrid>
                             <h:panelGrid  width="500">
-                                <p:selectOneMenu id="ciudad"  styleClass="ui-selectonemenu" filter="true"  value="#{beansPaciente.idCiudad}" required="true" style="width:100%" autoWidth="false" rendered="#{beansPaciente.escribirDatos}" >
+                                <p:selectOneMenu id="ciudad"  styleClass="ui-selectonemenu" filter="true"  value="#{BeansPaciente.idCiudad}" required="true" style="width:100%" autoWidth="false" rendered="#{BeansPaciente.escribirDatos}" >
                                     <f:selectItem  noSelectionOption="true" itemLabel="Seleccionar Opcion"  />
-                                    <f:selectItems  value="#{beansPaciente.lstCiudades}" var="c" itemValue="#{c.id}"  itemLabel="#{c.nombre}" />
+                                    <f:selectItems  value="#{BeansPaciente.lstCiudades}" var="c" itemValue="#{c.id}"  itemLabel="#{c.nombre}" />
                                 </p:selectOneMenu>
-                                <p:outputLabel value="#{beansPaciente.paciente.ciudad.nombre}" required="true" rendered="#{beansPaciente.verDatosview}" />
+                                <p:outputLabel value="#{BeansPaciente.paciente.ciudad.nombre}" required="true" rendered="#{BeansPaciente.verDatosview}" />
                             </h:panelGrid>
                         </h:panelGrid><br/>
                     </p:tab>
                 </p:accordionPanel>
             </p:outputPanel>
             <f:facet name="footer">
-                <p:commandButton value="Guardar"  icon="pi pi-check" action="#{beansPaciente.guardar()}" update="userdialog-content" process="userdialog-content @this" rendered="#{beansPaciente.escribirDatos}"  />
+                <p:commandButton value="Guardar"  icon="pi pi-check" action="#{BeansPaciente.guardar()}" update="userdialog-content" process="userdialog-content @this" rendered="#{BeansPaciente.escribirDatos}"  />
                 <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('userdialog').hide()"  styleClass="ui-button-secondary" type="button"/>
             </f:facet>
         </p:dialog>

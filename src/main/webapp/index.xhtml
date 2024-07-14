@@ -26,8 +26,8 @@
                         </p>
                     </h:panelGrid>
                     <h:panelGrid styleClass="container-inputs">
-                        <p:inputText value="#{beansUsuario.usuario_ingresado.correo}" placeholder="Correo" styleClass="correo"  type="email" /><br/>
-                        <p:password value="#{beansUsuario.usuario_ingresado.contra}" toggleMask="true" redisplay="true"
+                        <p:inputText value="#{beansUsuario.usuarioingresado.correo}" placeholder="Correo" styleClass="correo" type="email" /><br/>
+                        <p:password value="#{beansUsuario.usuarioingresado.contra}" toggleMask="true" redisplay="true"
                                     placeholder="Contraseña" styleClass="correo" /><br/>
                         <p:commandButton value="Iniciar Sesion"  action="#{beansUsuario.verificiarIngreso()}" styleClass="button ui-button-danger"
                                          update="form" />
