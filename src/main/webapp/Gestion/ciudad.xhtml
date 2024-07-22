@@ -67,20 +67,22 @@
         </p:panel>
     </h:form>
     <h:form id="dialogs" enctype="multipart/form-data">
-        <p:dialog header="Detalles del Usuario" showEffect="fade" modal="true" widgetVar="userdialog" width="800" height="400" responsive="true" styleClass="dialogs-barra">
+        <p:dialog header="Detalles de la ciudad" showEffect="fade" modal="true" widgetVar="userdialog" width="800" height="400" responsive="true" styleClass="dialogs-barra">
             <p:outputPanel id="userdialog-content" styleClass="ui-fluid dialogs-barra"  >
                 <p:accordionPanel multiple="true">
                     <p:tab title="Datos de la Ciudad ">
-                        <h:panelGrid columns="2" width="100%">
+                        <h:panelGrid width="100%">
                             <h:panelGrid width="95%">
                                 <p:outputLabel for="nombre" value="Nombre" />
                                 <p:inputText  value="#{BeansCiudad.ciudad.nombre}"  id="nombre" required="true" />
                             </h:panelGrid>
+                        </h:panelGrid><br/>
+                        <h:panelGrid width="100%">
                             <h:panelGrid  width="95%">
                                 <p:outputLabel for="descripcion" value="Descripcion" />
-                                <p:inputText  value="#{BeansCiudad.ciudad.descripcion}"  id="descripcion" required="true"/>
+                                <p:inputTextarea  value="#{BeansCiudad.ciudad.descripcion}"  id="descripcion" required="true"/>
                             </h:panelGrid>
-                        </h:panelGrid><br/>
+                        </h:panelGrid>
                     </p:tab>
                 </p:accordionPanel>
             </p:outputPanel>
